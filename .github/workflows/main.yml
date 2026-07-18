@@ -16,7 +16,7 @@ env:
 jobs:
   build:
     name: Project Build
-    runs-on: macos-latest
+    runs-on: macos-15-intel
     env:
       JOB_TYPE: BUILD
     steps:
