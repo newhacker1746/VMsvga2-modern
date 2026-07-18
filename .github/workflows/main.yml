@@ -121,7 +121,7 @@ jobs:
       if: github.event_name == 'release'
       with:
         files: VMsvga2-modern-*.zip
-        # body_path: ./changelog.md
+        body_path: ./changelog.md
 
     - uses: actions/upload-artifact@v4
       with:
