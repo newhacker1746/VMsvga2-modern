@@ -620,8 +620,8 @@
 			buildSettings = {
 				ARCHS = x86_64;
 				COPYRIGHT_NOTICE = "Copyright 2009-2013 Zenith432";
-				CURRENT_PROJECT_VERSION = 1.2.5;
-				DYLIB_COMPATIBILITY_VERSION = 1.2.5;
+				CURRENT_PROJECT_VERSION = 1.2.6;
+				DYLIB_COMPATIBILITY_VERSION = 1.2.6;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
 				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
@@ -655,6 +655,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"LOGGING_LEVEL=1",
 					FRAGILE,
+					VLOG_LOCAL,
 				);
 				INFOPLIST_FILE = "Info-AC.plist";
 				MODULE_NAME = net.osx86.driver.VMsvga2Accel;
@@ -697,6 +698,90 @@
 			};
 			name = ReleaseSnowLeo;
 		};
+		FE6D7C2A300C1AB50071A98B /* ReleaseSnowLeoDebug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E52B43CA10B5B37F002470B4 /* Generic.xcconfig */;
+			buildSettings = {
+				ARCHS = x86_64;
+				COPYRIGHT_NOTICE = "Copyright 2009-2013 Zenith432";
+				CURRENT_PROJECT_VERSION = 1.2.6;
+				DYLIB_COMPATIBILITY_VERSION = 1.2.6;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
+				KERNEL_EXTENSION_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				KERNEL_FRAMEWORK_HEADERS = "$(PROJECT_DIR)/MacKernelSDK/Headers";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/MacKernelSDK/Library/x86_64";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MODULE_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				SDKROOT = macosx;
+				STRIPFLAGS = "-no_uuid";
+			};
+			name = ReleaseSnowLeoDebug;
+		};
+		FE6D7C2B300C1AB50071A98B /* ReleaseSnowLeoDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"LOGGING_LEVEL=3",
+					VLOG_LOCAL,
+				);
+				INFOPLIST_FILE = "Info-FB.plist";
+				MODULE_NAME = net.osx86.driver.VMsvga2;
+				PRODUCT_NAME = VMsvga2;
+				STRIP_STYLE = "non-global";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = ReleaseSnowLeoDebug;
+		};
+		FE6D7C2C300C1AB50071A98B /* ReleaseSnowLeoDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"LOGGING_LEVEL=3",
+					FRAGILE,
+					VLOG_LOCAL,
+				);
+				INFOPLIST_FILE = "Info-AC.plist";
+				MODULE_NAME = net.osx86.driver.VMsvga2Accel;
+				PRODUCT_NAME = VMsvga2Accel;
+				STRIP_STYLE = "non-global";
+				WRAPPER_EXTENSION = kext;
+			};
+			name = ReleaseSnowLeoDebug;
+		};
+		FE6D7C2D300C1AB50071A98B /* ReleaseSnowLeoDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = "LOGGING_LEVEL=1";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				INFOPLIST_FILE = "Info-GA.plist";
+				MODULE_NAME = net.osx86.VMsvga2GA;
+				PRODUCT_NAME = VMsvga2GA;
+				VERSIONING_SYSTEM = "apple-generic";
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = ReleaseSnowLeoDebug;
+		};
+		FE6D7C2E300C1AB50071A98B /* ReleaseSnowLeoDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = "LOGGING_LEVEL=1";
+				INFOPLIST_FILE = "Info-GLD.plist";
+				MODULE_NAME = net.osx86.VMsvga2GLDriver;
+				PRODUCT_NAME = VMsvga2GLDriver;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_EXPORT_DECL = "__attribute__((visibility(\"hidden\")))";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = ReleaseSnowLeoDebug;
+		};
+		FE6D7C2F300C1AB50071A98B /* ReleaseSnowLeoDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = All;
+			};
+			name = ReleaseSnowLeoDebug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -704,6 +789,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E512D9AD1077F654002194CB /* ReleaseSnowLeo */,
+				FE6D7C2B300C1AB50071A98B /* ReleaseSnowLeoDebug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseSnowLeo;
@@ -712,6 +798,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E512D9AC1077F654002194CB /* ReleaseSnowLeo */,
+				FE6D7C2A300C1AB50071A98B /* ReleaseSnowLeoDebug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseSnowLeo;
@@ -720,6 +807,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E512D9AE1077F654002194CB /* ReleaseSnowLeo */,
+				FE6D7C2C300C1AB50071A98B /* ReleaseSnowLeoDebug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseSnowLeo;
@@ -728,6 +816,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E512D9AF1077F654002194CB /* ReleaseSnowLeo */,
+				FE6D7C2D300C1AB50071A98B /* ReleaseSnowLeoDebug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseSnowLeo;
@@ -736,6 +825,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E59352931269A11F00346DAD /* ReleaseSnowLeo */,
+				FE6D7C2F300C1AB50071A98B /* ReleaseSnowLeoDebug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseSnowLeo;
@@ -744,6 +834,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E5CC19B210CC0DA100EC0343 /* ReleaseSnowLeo */,
+				FE6D7C2E300C1AB50071A98B /* ReleaseSnowLeoDebug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = ReleaseSnowLeo;
