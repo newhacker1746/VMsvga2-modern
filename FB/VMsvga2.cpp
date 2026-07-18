@@ -233,7 +233,7 @@ void CLASS::ConvertAlphaCursor(uint32_t* cursor, uint32_t width, uint32_t height
 // #endif /* VECTORIZE */
 }
 
-IOReturn CLASS::setCursorImage(void* cursorImage)
+/* IOReturn CLASS::setCursorImage(void* cursorImage)
 {
 	void* device_cursor;
 #ifndef HAVE_CURSOR_HOTSPOT
@@ -329,7 +329,7 @@ IOReturn CLASS::setCursorImage(void* cursorImage)
 	IOLockUnlock(m_iolock);
 	return kIOReturnSuccess;
 }
-
+*/
 #pragma mark -
 #pragma mark IOFramebuffer Methods
 #pragma mark -
