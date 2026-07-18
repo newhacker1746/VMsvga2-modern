@@ -182,13 +182,13 @@ IOReturn CLASS::setCursorState(SInt32 x, SInt32 y, bool visible)
 	return kIOReturnSuccess;
 }
 
-__attribute__((visibility("hidden"), always_inline))
-static inline
-__m64 _my_pinsrw(__m64 a, int d, int n)
-{
-	__asm__ volatile ("pinsrw %2, %1, %0" : "+y"(a) : "r"(d), "K"(n));
-	return a;
-}
+// __attribute__((visibility("hidden"), always_inline))
+// static inline
+// __m64 _my_pinsrw(__m64 a, int d, int n)
+// {
+// 	__asm__ volatile ("pinsrw %2, %1, %0" : "+y"(a) : "r"(d), "K"(n));
+// 	return a;
+// }
 
 __attribute__((visibility("hidden")))
 void CLASS::ConvertAlphaCursor(uint32_t* cursor, uint32_t width, uint32_t height)
@@ -196,26 +196,26 @@ void CLASS::ConvertAlphaCursor(uint32_t* cursor, uint32_t width, uint32_t height
 	/*
 	 * Pre-multiply alpha cursor
 	 */
-#ifdef VECTORIZE
-	static __m64 const datum = { 0x808180818081ULL };
-	__m64 const mm_zero = { 0ULL };
-	__m64 mm0;
-	uint32_t alpha, num_pixels;
-	for (num_pixels = width * height; num_pixels; --num_pixels, ++cursor) {
-		alpha = (*cursor) >> 24U;
-		if (!alpha || static_cast<uint8_t>(alpha) == 255U)
-			continue;
-		mm0 = __builtin_ia32_punpcklbw((__m64){*cursor}, mm_zero);
-		*cursor = __builtin_ia32_vec_ext_v2si(
-			__builtin_ia32_packuswb(
-			_my_pinsrw(
-			__builtin_ia32_psrlwi(
-			__builtin_ia32_pmulhuw(
-			__builtin_ia32_pmullw(
-			__builtin_ia32_pshufw(mm0, 255), mm0), datum), 7), alpha, 3), mm_zero), 0);
-	}
-	__builtin_ia32_emms();
-#else /* VECTORIZE */
+// #ifdef VECTORIZE
+// 	static __m64 const datum = { 0x808180818081ULL };
+// 	__m64 const mm_zero = { 0ULL };
+// 	__m64 mm0;
+// 	uint32_t alpha, num_pixels;
+// 	for (num_pixels = width * height; num_pixels; --num_pixels, ++cursor) {
+// 		alpha = (*cursor) >> 24U;
+// 		if (!alpha || static_cast<uint8_t>(alpha) == 255U)
+// 			continue;
+// 		mm0 = __builtin_ia32_punpcklbw((__m64){*cursor}, mm_zero);
+// 		*cursor = __builtin_ia32_vec_ext_v2si(
+// 			__builtin_ia32_packuswb(
+// 			_my_pinsrw(
+// 			__builtin_ia32_psrlwi(
+// 			__builtin_ia32_pmulhuw(
+// 			__builtin_ia32_pmullw(
+// 			__builtin_ia32_pshufw(mm0, 255), mm0), datum), 7), alpha, 3), mm_zero), 0);
+// 	}
+// 	__builtin_ia32_emms();
+// #else /* VECTORIZE */
 	uint32_t num_pixels, pixel, alpha, r, g, b;
 #if 0
 	LogPrintf(2, "%s: %ux%u pixels @ %p\n", __FUNCTION__, width, height, cursor);
@@ -230,7 +230,7 @@ void CLASS::ConvertAlphaCursor(uint32_t* cursor, uint32_t width, uint32_t height
 		r = ((pixel >> 16) & 0xFFU) * alpha / 255U;
 		*cursor = (pixel & 0xFF000000U) | (r << 16) | (g << 8) | b;
 	}
-#endif /* VECTORIZE */
+// #endif /* VECTORIZE */
 }
 
 IOReturn CLASS::setCursorImage(void* cursorImage)
