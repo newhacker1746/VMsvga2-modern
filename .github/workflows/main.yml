@@ -74,47 +74,47 @@ jobs:
           VMsvga2GLDriver.bundle \
           VMsvga2GLDriver.bundle.dSYM
           
-     - name: Generate Release Description
-       if: github.event_name == 'release'
-       env:
-         CURRENT_TAG: ${{ github.event.release.tag_name }}
-       run: |
-         set -euo pipefail
+    - name: Generate Release Description
+      if: github.event_name == 'release'
+      env:
+        CURRENT_TAG: ${{ github.event.release.tag_name }}
+      run: |
+       set -euo pipefail
 
-         CURRENT_COMMIT="$(git rev-list -n 1 "$CURRENT_TAG")"
+       CURRENT_COMMIT="$(git rev-list -n 1 "$CURRENT_TAG")"
 
-         LAST_TAG="$(
-           git describe \
-             --tags \
-             --abbrev=0 \
-             "${CURRENT_COMMIT}^" \
-             2>/dev/null || true
-         )"
+       LAST_TAG="$(
+          git describe \
+            --tags \
+            --abbrev=0 \
+            "${CURRENT_COMMIT}^" \
+            2>/dev/null || true
+        )"
 
-         if [[ -n "$LAST_TAG" ]]; then
-           NUM_COMMITS="$(git rev-list --count "${LAST_TAG}..${CURRENT_COMMIT}")"
+        if [[ -n "$LAST_TAG" ]]; then
+          NUM_COMMITS="$(git rev-list --count "${LAST_TAG}..${CURRENT_COMMIT}")"
 
-           LAST_TEN_COMMITS="$(
-             git log \
-               --pretty=format:"%h - %s (%an)" \
-               -n 10 \
-               "${LAST_TAG}..${CURRENT_COMMIT}"
-           )"
+          LAST_TEN_COMMITS="$(
+            git log \
+              --pretty=format:"%h - %s (%an)" \
+              -n 10 \
+             "${LAST_TAG}..${CURRENT_COMMIT}"
+          )"
 
-           {
-             printf 'Since %s there have been %s commit(s).\n\n' \
-               "$LAST_TAG" "$NUM_COMMITS"
-             printf 'The descriptions for the first (at most) 10 of these are as follows:\n\n'
-             printf '%s\n' "$LAST_TEN_COMMITS"
-           } > changelog.md
-         else
-           {
-             printf 'Release %s\n\n' "$CURRENT_TAG"
-             printf 'No preceding release tag was found in this repository history.\n'
-           } > changelog.md
-         fi
+          {
+            printf 'Since %s there have been %s commit(s).\n\n' \
+              "$LAST_TAG" "$NUM_COMMITS"
+            printf 'The descriptions for the first (at most) 10 of these are as follows:\n\n'
+            printf '%s\n' "$LAST_TEN_COMMITS"
+          } > changelog.md
+        else
+          {
+            printf 'Release %s\n\n' "$CURRENT_TAG"
+            printf 'No preceding release tag was found in this repository history.\n'
+          } > changelog.md
+        fi
 
-         cat changelog.md
+        cat changelog.md
 
 
     - uses: softprops/action-gh-release@v2
