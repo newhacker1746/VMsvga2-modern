@@ -122,15 +122,15 @@ void memset32(void* dest, uint32_t value, size_t size)
 	__asm__ volatile ("cld; rep stosl" : "+c" (size), "+D" (dest) : "a" (value) : "memory");
 }
 
-#ifdef VECTORIZE
-static inline
-void memset128(void* dest, __v2di value, size_t size)
-{
-	__v2di* d = static_cast<__v2di*>(dest);
-	for (; size; --size, ++d)
-		__builtin_ia32_movntdq(d, value);
-}
-#endif /* VECTORIZE */
+// #ifdef VECTORIZE
+// static inline
+// void memset128(void* dest, __v2di value, size_t size)
+// {
+// 	__v2di* d = static_cast<__v2di*>(dest);
+// 	for (; size; --size, ++d)
+// 		__builtin_ia32_movntdq(d, value);
+// }
+// #endif /* VECTORIZE */
 
 static
 bool isRegionEmpty(IOAccelDeviceRegion const* rgn)
@@ -1070,13 +1070,13 @@ void CLASS::clear_yuv_to_black(void* buffer, vm_size_t size)
 	/*
 	 * XMM (SSE2) version
 	 */
-#ifdef VECTORIZE
-	if ((reinterpret_cast<vm_address_t>(buffer) & 0xFU) == 0U) {
-		__v4si p = { pixval, pixval, pixval, pixval };
-		memset128(buffer, p, size / sizeof p);
-		return;
-	}
-#endif /* VECTORIZE */
+// #ifdef VECTORIZE
+// 	if ((reinterpret_cast<vm_address_t>(buffer) & 0xFU) == 0U) {
+// 		__v4si p = { pixval, pixval, pixval, pixval };
+// 		memset128(buffer, p, size / sizeof p);
+// 		return;
+// 	}
+// #endif /* VECTORIZE */
 	memset32(buffer, pixval, s);
 }
 
